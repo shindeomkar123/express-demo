@@ -4,10 +4,10 @@ export const dbConnect = () => {
   const mongoUsername = process.env.MONGO_USERNAME;
   const mongoPassword = process.env.MONGO_PASSWORD;
   const mongoDbName = process.env.MONGO_DBNAME;
-  const mongoUri = `mongodb+srv://${mongoUsername}:${encodeURIComponent(
+  const mongoHost = process.env.MONGO_HOST || "mongo";
+  const mongoUri = `mongodb://${mongoUsername}:${encodeURIComponent(
     mongoPassword!
-  )}@mydb.ohqugvw.mongodb.net/${mongoDbName}?appName=mydb`;
-  console.log("MongoDB URI:", mongoUri); // Debugging line
+  )}@${mongoHost}:27017/${mongoDbName}?authSource=admin`;
   connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
